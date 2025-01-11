@@ -1,0 +1,18 @@
+GET http://localhost:3000/
+
+###
+
+GET http://localhost:3000/rob
+
+###
+
+GET http://localhost:3000/dan
+
+###
+GET https://cse341-week1-q8xn.onrender.com
+
+###
+GET https://cse341-week1-q8xn.onrender.com/rob
+
+###
+GET https://cse341-week1-q8xn.onrender.com/dan
