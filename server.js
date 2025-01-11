@@ -1,13 +1,12 @@
+// Import the necessary modules
 const express = require('express');
 const app = express();
-const lesson1Controller = require('./controllers/lesson1');
-
-// Define a routes
-app.get('/', lesson1Controller.maryRoute);
-app.get('/dan', lesson1Controller.danRoute);
 
 // Set the port value
 const port = process.env.PORT || 3000;
+
+// Use routes defined in the routes directory
+app.use('/', require('./routes'));
 
 // Start the server
 app.listen(port, () => {
