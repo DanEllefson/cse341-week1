@@ -1,13 +1,10 @@
-// Import express
 const express = require('express');
-
-// Create an express app
 const app = express();
+const lesson1Controller = require('./controllers/lesson1');
 
-// Define a route
-app.get('/', (req, res) => {
-  res.send('Testing......');
-});
+// Define a routes
+app.get('/', lesson1Controller.maryRoute);
+app.get('/dan', lesson1Controller.danRoute);
 
 // Set the port value
 const port = process.env.PORT || 3000;
