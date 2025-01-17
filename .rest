@@ -1,16 +1,22 @@
-GET http://localhost:3000/
+// Local host: request all contacts
+GET http://localhost:8080/contacts/
 
 ###
-GET http://localhost:3000/rob
+// Local host: request Darrel Bowman contact
+GET http://localhost:8080/contacts/6789ac551833e88125af5c94
 
 ###
-GET http://localhost:3000/dan
+// Local host: request Tammy Wenzel contact
+GET http://localhost:8080/contacts/6789ac9a1833e88125af5c96
 
 ###
-GET https://cse341-week1-q8xn.onrender.com
+// Local host: request Richard Miller contact
+GET http://localhost:8080/contacts/6789acd31833e88125af5c98
 
 ###
-GET https://cse341-week1-q8xn.onrender.com/rob
+// Local host: request Millie Tohey contact
+GET http://localhost:8080/contacts/6789ad0c1833e88125af5c9a
 
-###
-GET https://cse341-week1-q8xn.onrender.com/dan
+##########################################
+
+// Remote host: request all contacts
