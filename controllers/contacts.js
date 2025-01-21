@@ -1,38 +1,39 @@
 'use strict';
 
-const mongodb = require('../db/connect');
-const { ObjectId } = require('mongodb');
+// Import the required modules
 const Contacts = require('../models/Post');
 
+// Return all contacts
 const getAll = async (_req, res) => {
-  const result = await mongodb.getDb().collection('contacts').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
-};
-
-const getSingle = async (req, res, _next) => {
-  let userId;
   try {
-    userId = new ObjectId(req.params.id); // Convert the id to ObjectId
-  } catch (err) {
-    res.status(400).json({ message: 'Invalid ID format', error: err.message }); // Handle invalid ObjectId and send error message
-    return;
-  }
-
-  const result = await mongodb.getDb().collection('contacts').find({ _id: userId });
-
-  result.toArray().then((lists) => {
-    if (lists.length === 0) {
-      res.status(404).json({ message: 'Contact not found' });
-    } else {
-      res.setHeader('Content-Type', 'application/json');
-      res.status(200).json(lists[0]); // Return the first matched document
+    const contacts = await Contacts.find();
+    if (!contacts) {
+      res.status(404).json({ message: 'No contacts found in database' });
+      return;
     }
-  });
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(contacts);
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to get contacts', error: error.message });
+  }
 };
 
+// Return a single contact
+const getSingle = async (req, res) => {
+  try {
+    const contact = await Contacts.findById(req.params.id);
+    if (!contact) {
+      res.status(404).json({ message: 'Contact not found' });
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(contact);
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to get contact', error: error.message });
+  }
+};
+
+// Create a new contact
 const createSingle = async (req, res) => {
   const contact = new Contacts({
     firstName: req.body.firstName,
@@ -42,10 +43,28 @@ const createSingle = async (req, res) => {
     birthday: req.body.birthday
   });
 
-  contact.save().then((result) => {
+  try {
+    await contact.save();
     res.setHeader('Content-Type', 'application/json');
-    res.status(201).json(result._id);
-  });
+    res.status(201).json(contact._id);
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to create contact', error: error.message });
+  }
 };
 
-module.exports = { getAll, getSingle, createSingle };
+// Delete a single contact
+const deleteSingle = async (req, res) => {
+  try {
+    const contact = await Contacts.findByIdAndDelete(req.params.id);
+    if (!contact) {
+      res.status(404).json({ message: 'Contact not found' });
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json({ message: 'Contact deleted' });
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to delete contact', error: error.message });
+  }
+};
+
+module.exports = { getAll, getSingle, createSingle, deleteSingle };

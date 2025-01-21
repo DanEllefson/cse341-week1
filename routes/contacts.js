@@ -12,7 +12,7 @@ router.get('/', contactsController.getAll);
 router.get('/:id', contactsController.getSingle);
 
 // Delete a single contact
-// router.delete('/:id', contactsController.deleteSingle);
+router.delete('/:id', contactsController.deleteSingle);
 
 // Create a new contact
 router.post('/', contactsController.createSingle);
