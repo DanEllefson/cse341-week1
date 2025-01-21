@@ -1,6 +1,8 @@
 'use strict';
 
+// Import the required modules
 const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
 const uri = process.env.MONGODB_URI; // Load the connection string from .env
 const client = new MongoClient(uri);
@@ -21,8 +23,21 @@ async function connectToDatabase() {
   }
 }
 
+async function connectMongoose() {
+  try {
+    if (!db) {
+      await mongoose.connect(uri);
+      db = mongoose.connection;
+      console.log('Connected to MongoDB using Mongoose!');
+    }
+  } catch (error) {
+    console.error('Failed to connect to MongoDB using Mongoose:', error);
+    throw error;
+  }
+}
+
 function getDb() {
   return db;
 }
 
-module.exports = { connectToDatabase, getDb };
+module.exports = { connectToDatabase, connectMongoose, getDb };

@@ -23,7 +23,7 @@ app.use('/', require('./routes'));
 
 const server = app.listen(port, async (_req, _res) => {
   try {
-    await mongodb.connectToDatabase();
+    await mongodb.connectMongoose();
     console.log(`Server is running on http://localhost:${port}`);
   } catch (error) {
     console.error('Failed to connect to MongoDB:', error);
