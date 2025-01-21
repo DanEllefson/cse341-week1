@@ -1,6 +1,5 @@
 'use strict';
 
-require('dotenv').config(); // Load environment variables
 const { MongoClient } = require('mongodb');
 
 const uri = process.env.MONGODB_URI; // Load the connection string from .env

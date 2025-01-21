@@ -1,5 +1,7 @@
 'use strict';
 
+// Import the required modules
+require('dotenv').config(); // This must load before other modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongodb = require('./db/connect');
@@ -11,7 +13,7 @@ const port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 
 // All incoming requests will have the response headers set to allow all origins
-app.use('/', (req, res, next) => {
+app.use('/', (_req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   next();
 });
@@ -42,14 +44,15 @@ process.on('SIGINT', () => {
   console.log('Process terminated. Closing server...');
   server.close(() => {
     console.log('Server closed.');
-    throw new Error('Process terminated.');
+    // throw new Error('Process terminated.');
   });
 });
 
+// Handle termination signals
 process.on('SIGTERM', () => {
   console.log('Process terminated by external signal. Closing server...');
   server.close(() => {
     console.log('Server closed.');
-    throw new Error('Process terminated.');
+    // throw new Error('Process terminated.');
   });
 });

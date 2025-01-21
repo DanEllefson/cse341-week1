@@ -50,6 +50,7 @@ export default [
       ],
       // Disable console.log() in production
       'no-console': [process.env.NODE_ENV === 'production' ? 'warn' : 'off'],
+      // Allow unused variables starting with an underscore
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
     }
   }
