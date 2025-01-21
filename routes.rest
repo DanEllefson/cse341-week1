@@ -25,15 +25,12 @@ GET http://localhost:8080/contacts/ HTTP/1.1
 
 ##############################################################
 // Local host: update the Zachary Quinn contact
-PUT http://localhost:8080/contacts/67902f8d60f6c3a1f35ee274 HTTP/1.1
+PUT http://localhost:8080/contacts/67903423f537b5d6fc6c3e31 HTTP/1.1
 content-type: application/json
 
 {
-  "firstName": "Zachary",
-  "lastName": "Quinn",
   "email": "zak.quinn@google.com",
-  "favoriteColor": "Red",
-  "birthday": "2004-07-12"
+  "favoriteColor": "Red"
 }
 
 ##############################################################
@@ -42,7 +39,7 @@ GET http://localhost:8080/contacts/ HTTP/1.1
 
 ##############################################################
 // Local host: delete the Zachary Quinn contact
-DELETE http://localhost:8080/contacts/67902f8d60f6c3a1f35ee274 HTTP/1.1
+DELETE http://localhost:8080/contacts/67903423f537b5d6fc6c3e31 HTTP/1.1
 
 ##############################################################
 // Local host: request all contacts to show that Zachary Quinn was deleted
@@ -52,6 +49,8 @@ GET http://localhost:8080/contacts/ HTTP/1.1
 
 ###################################################################################################
 ###################################################################################################
+###################################################################################################
+
 
 
 // Remote host: request all contacts
@@ -84,11 +83,8 @@ PUT https://cse341-week1-q8xn.onrender.com/contacts/67902fee00818639208e7e66 HTT
 content-type: application/json
 
 {
-  "firstName": "Zachary",
-  "lastName": "Quinn",
   "email": "zak.quinn@google.com",
-  "favoriteColor": "Red",
-  "birthday": "2004-07-12"
+  "favoriteColor": "Red"
 }
 
 ##############################################################

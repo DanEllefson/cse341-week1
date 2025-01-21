@@ -75,7 +75,7 @@ const updateSingle = async (req, res) => {
       res.status(404).json({ message: 'Contact not found' });
       return;
     }
-    res.status(204).end();
+    res.status(204).send();
   } catch (error) {
     res.status(400).json({ message: 'Failed to update contact', error: error.message });
   }

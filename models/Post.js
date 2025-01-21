@@ -3,7 +3,7 @@
 // Import the required modules
 const mongoose = require('mongoose');
 
-// Create a schema for the contacts
+// Create a schema for the contacts database
 const postSchema = new mongoose.Schema({
   firstName: {
     type: String,
