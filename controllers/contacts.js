@@ -2,6 +2,7 @@
 
 const mongodb = require('../db/connect');
 const { ObjectId } = require('mongodb');
+const Contacts = require('../models/Post');
 
 const getAll = async (_req, res) => {
   const result = await mongodb.getDb().collection('contacts').find();
@@ -32,4 +33,19 @@ const getSingle = async (req, res, _next) => {
   });
 };
 
-module.exports = { getAll, getSingle };
+const createSingle = async (req, res) => {
+  const contact = new Contacts({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday
+  });
+
+  contact.save().then((result) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.status(201).json(result._id);
+  });
+};
+
+module.exports = { getAll, getSingle, createSingle };
