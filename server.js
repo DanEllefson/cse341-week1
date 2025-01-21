@@ -21,6 +21,7 @@ app.use('/', (_req, res, next) => {
 // All incoming requests are passed through the routes/index.js file
 app.use('/', require('./routes'));
 
+// Start the server
 const server = app.listen(port, async (_req, _res) => {
   try {
     await mongodb.connectMongoose();
@@ -44,7 +45,6 @@ process.on('SIGINT', () => {
   console.log('Process terminated. Closing server...');
   server.close(() => {
     console.log('Server closed.');
-    // throw new Error('Process terminated.');
   });
 });
 
@@ -53,6 +53,5 @@ process.on('SIGTERM', () => {
   console.log('Process terminated by external signal. Closing server...');
   server.close(() => {
     console.log('Server closed.');
-    // throw new Error('Process terminated.');
   });
 });

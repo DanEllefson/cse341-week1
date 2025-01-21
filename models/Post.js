@@ -1,7 +1,9 @@
 'use strict';
 
+// Import the required modules
 const mongoose = require('mongoose');
 
+// Create a schema for the contacts
 const postSchema = new mongoose.Schema({
   firstName: {
     type: String,
@@ -20,7 +22,7 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   birthday: {
-    type: String,
+    type: Date,
     required: true
   }
 });

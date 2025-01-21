@@ -45,7 +45,8 @@ export default [
           printWidth: 100, // Line wrap limit
           singleQuote: true, // Use single quotes
           trailingComma: 'none', // No trailing commas
-          jsxBracketSameLine: true // JSX brackets stay on the same line
+          jsxBracketSameLine: true, // JSX brackets stay on the same line
+          endOfLine: 'lf' // Use Unix line endings
         }
       ],
       // Disable console.log() in production

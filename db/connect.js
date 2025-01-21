@@ -9,6 +9,7 @@ const uri = process.env.MONGODB_URI;
 // Create a database object to store the connection
 let db;
 
+// Connect to MongoDB using Mongoose
 async function connectMongoose() {
   try {
     if (!db) {
@@ -22,6 +23,7 @@ async function connectMongoose() {
   }
 }
 
+// Return the database object
 function getDb() {
   return db;
 }

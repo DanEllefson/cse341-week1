@@ -46,7 +46,7 @@ const createSingle = async (req, res) => {
   try {
     await contact.save();
     res.setHeader('Content-Type', 'application/json');
-    res.status(201).json(contact._id);
+    res.status(201).json({ message: 'New contact added', id: contact._id });
   } catch (error) {
     res.status(400).json({ message: 'Failed to create contact', error: error.message });
   }
@@ -75,8 +75,7 @@ const updateSingle = async (req, res) => {
       res.status(404).json({ message: 'Contact not found' });
       return;
     }
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(contact);
+    res.status(204).end();
   } catch (error) {
     res.status(400).json({ message: 'Failed to update contact', error: error.message });
   }

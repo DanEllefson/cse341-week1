@@ -1,9 +1,11 @@
 'use strict';
 
+// Import the required modules
 const express = require('express');
-const router = express.Router();
-
 const contactsController = require('../controllers/contacts');
+
+// Create a new router
+const router = express.Router();
 
 // Return all contacts
 router.get('/', contactsController.getAll);
