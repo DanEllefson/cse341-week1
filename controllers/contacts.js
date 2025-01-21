@@ -67,4 +67,19 @@ const deleteSingle = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getSingle, createSingle, deleteSingle };
+// Update a single contact
+const updateSingle = async (req, res) => {
+  try {
+    const contact = await Contacts.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!contact) {
+      res.status(404).json({ message: 'Contact not found' });
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.status(200).json(contact);
+  } catch (error) {
+    res.status(400).json({ message: 'Failed to update contact', error: error.message });
+  }
+};
+
+module.exports = { getAll, getSingle, createSingle, deleteSingle, updateSingle };

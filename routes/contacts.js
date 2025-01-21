@@ -17,4 +17,7 @@ router.delete('/:id', contactsController.deleteSingle);
 // Create a new contact
 router.post('/', contactsController.createSingle);
 
+// Update a single contact
+router.put('/:id', contactsController.updateSingle);
+
 module.exports = router;
