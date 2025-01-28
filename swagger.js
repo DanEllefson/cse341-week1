@@ -9,7 +9,7 @@ const doc = {
     description:
       'This API manages a database of contacts. It allows you to perform CRUD operations on all contacts.'
   },
-  host: 'localhost:8080'
+  host: 'cse341-week1-q8xn.onrender.com'
 };
 
 const outputFile = './swagger-output.json';
