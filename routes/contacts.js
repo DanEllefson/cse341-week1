@@ -3,43 +3,47 @@
 // Import the required modules
 const express = require('express');
 const contactsController = require('../controllers/contacts');
+const contactsValidate = require('../utilities/contacts-validation');
+const utilities = require('../utilities/index');
 
 // Create a new router
 const router = express.Router();
 
 // Return all contacts
-router.get(
-  '/',
-  contactsController.getAll
-  // #swagger.description = 'Return all contacts in the database.'
-);
+router.get('/', utilities.handleErrors(contactsController.getAll));
 
 // Return a single contact
 router.get(
   '/:id',
-  contactsController.getSingle
-  // #swagger.description = 'Return a single contact by ID from the database.'
+  contactsValidate.idRules,
+  contactsValidate.checkId,
+  utilities.handleErrors(contactsController.getSingle)
 );
 
 // Delete a single contact
 router.delete(
   '/:id',
-  contactsController.deleteSingle
-  // #swagger.description = 'Delete a single contact by ID from the database.'
+  contactsValidate.idRules,
+  contactsValidate.checkId,
+  utilities.handleErrors(contactsController.deleteSingle)
 );
 
 // Create a new contact
 router.post(
   '/',
-  contactsController.createSingle
-  // #swagger.description = 'Create a new contact in the database.'
+  contactsValidate.contactRules,
+  contactsValidate.checkContact,
+  utilities.handleErrors(contactsController.createSingle)
 );
 
 // Update a single contact
 router.put(
   '/:id',
-  contactsController.updateSingle
-  // #swagger.description = 'Update a single contact by ID in the database.'
+  contactsValidate.idRules,
+  contactsValidate.checkId,
+  contactsValidate.contactRules,
+  contactsValidate.checkContact,
+  utilities.handleErrors(contactsController.updateSingle)
 );
 
 module.exports = router;

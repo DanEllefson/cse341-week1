@@ -21,11 +21,17 @@ const getAll = async (_req, res) => {
 // Return a single contact
 const getSingle = async (req, res) => {
   try {
+    if (!req.params.id) {
+      res.status(400).json({ message: 'ID parameter is required' });
+      return;
+    }
+
     const contact = await Contacts.findById(req.params.id);
     if (!contact) {
       res.status(404).json({ message: 'Contact not found' });
       return;
     }
+
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(contact);
   } catch (error) {
@@ -43,6 +49,17 @@ const createSingle = async (req, res) => {
     birthday: req.body.birthday
   });
 
+  if (
+    !contact.firstName ||
+    !contact.lastName ||
+    !contact.email ||
+    !contact.favoriteColor ||
+    !contact.birthday
+  ) {
+    res.status(400).json({ message: 'All fields are required' });
+    return;
+  }
+
   try {
     await contact.save();
     res.setHeader('Content-Type', 'application/json');
@@ -55,11 +72,17 @@ const createSingle = async (req, res) => {
 // Delete a single contact
 const deleteSingle = async (req, res) => {
   try {
+    if (!req.params.id) {
+      res.status(400).json({ message: 'ID parameter is required' });
+      return;
+    }
+
     const contact = await Contacts.findByIdAndDelete(req.params.id);
     if (!contact) {
       res.status(404).json({ message: 'Contact not found' });
       return;
     }
+
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json({ message: 'Contact deleted' });
   } catch (error) {
@@ -77,6 +100,18 @@ const updateSingle = async (req, res) => {
       favoriteColor: req.body.favoriteColor,
       birthday: req.body.birthday
     };
+
+    if (
+      !contact.firstName ||
+      !contact.lastName ||
+      !contact.email ||
+      !contact.favoriteColor ||
+      !contact.birthday
+    ) {
+      res.status(400).json({ message: 'All fields are required' });
+      return;
+    }
+
     const returnContact = await Contacts.findByIdAndUpdate(req.params.id, contact, { new: true });
     if (!returnContact) {
       res.status(404).json({ message: 'Contact not found' });
