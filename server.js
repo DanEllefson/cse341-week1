@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const mongodb = require('./db/connect');
 const routes = require('./routes/index');
-const utilites = require('./utilities/index');
+const utilities = require('./utilities/index');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -25,7 +25,7 @@ app.use('/', (_req, res, next) => {
 });
 
 // All incoming requests are passed through the routes/index.js file
-app.use('/', utilites.handleErrors(routes));
+app.use('/', utilities.handleErrors(routes));
 
 // Start the server
 const server = app.listen(port, async (_req, _res) => {

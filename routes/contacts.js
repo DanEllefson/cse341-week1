@@ -15,7 +15,7 @@ router.get('/', utilities.handleErrors(contactsController.getAll));
 // Return a single contact
 router.get(
   '/:id',
-  contactsValidate.idRules,
+  contactsValidate.idRules(),
   contactsValidate.checkId,
   utilities.handleErrors(contactsController.getSingle)
 );
@@ -23,7 +23,7 @@ router.get(
 // Delete a single contact
 router.delete(
   '/:id',
-  contactsValidate.idRules,
+  contactsValidate.idRules(),
   contactsValidate.checkId,
   utilities.handleErrors(contactsController.deleteSingle)
 );
@@ -31,7 +31,7 @@ router.delete(
 // Create a new contact
 router.post(
   '/',
-  contactsValidate.contactRules,
+  contactsValidate.contactRules(),
   contactsValidate.checkContact,
   utilities.handleErrors(contactsController.createSingle)
 );
@@ -39,9 +39,9 @@ router.post(
 // Update a single contact
 router.put(
   '/:id',
-  contactsValidate.idRules,
+  contactsValidate.idRules(),
   contactsValidate.checkId,
-  contactsValidate.contactRules,
+  contactsValidate.contactRules(),
   contactsValidate.checkContact,
   utilities.handleErrors(contactsController.updateSingle)
 );
