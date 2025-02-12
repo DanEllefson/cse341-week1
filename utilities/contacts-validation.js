@@ -44,7 +44,7 @@ contactsValidate.contactRules = () => {
 
     body('favoriteColor').isString().withMessage('Favorite color must be a string'),
 
-    body('birthday').isDate().withMessage('Invalid date')
+    body('birthday').isISO8601().withMessage('Date must be in ISO 8601 format')
   ];
 };
 
